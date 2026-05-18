@@ -23,6 +23,8 @@ rclone). Baut/erhält die Top-Level-Taxonomie, sortiert Müll in Quarantäne.
 bei Apply MUSS `NEWS_BUERO_REMOTE` in `~/cortex/main.py` nachgezogen werden.
 
 ## Status
-Struktur (8 Buckets) in gdrive-Root angelegt. Sorter gebaut. Erstes
-Dry-Run-Manifest erzeugt — wartet auf Leos Freigabe pro Move-Block.
-Bisync-Dienst (WD-60) ist davon unabhängig (Müll nicht im bisync-Set).
+2026-05-18: Struktur (8 Buckets) live. Manifest A–E **angewendet, 76/76 ok**,
+Ledger `ledger/ledger_2026-05-18_*.jsonl` (reversibel via --undo). Bürokratie
++ Personalien → `10_Buerokratie/`; News-Poll-Pfad in ~/cortex/main.py
+nachgezogen, deployed, verifiziert (ctx buero=True). Root entmüllt.
+Bisync-Dienst (WD-60) unabhängig (Müll war nicht im bisync-Set).
