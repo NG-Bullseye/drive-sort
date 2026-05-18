@@ -140,7 +140,8 @@ def do_apply(manifest: Path) -> None:
             if top in set(RULES["protected"]):
                 print(f"  SKIP protected: {src}")
                 continue
-            cmd = (["move", f"{REMOTE}{src}", f"{REMOTE}{dst}"]
+            cmd = (["move", f"{REMOTE}{src}", f"{REMOTE}{dst}",
+                    "--delete-empty-src-dirs"]
                    if action == "dir"
                    else ["moveto", f"{REMOTE}{src}", f"{REMOTE}{dst}"])
             r = rclone(*cmd, check=False)
