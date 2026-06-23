@@ -2,3 +2,4 @@ manifests/*.tsv
 ledger/*.jsonl
 __pycache__/
 *.pyc
+sort-rules.yaml

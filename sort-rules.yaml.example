@@ -1,0 +1,21 @@
+# drive-sort Regeln — deklarativ, erste passende Regel gewinnt.
+
+remote: "gdrive:"
+
+# Ordner die NIE angefasst werden.
+protected:
+  - Backup
+  - secrets
+
+# Ziel-Buckets in Reihenfolge.
+buckets:
+  - "00_Inbox"
+  - "01_Work"
+  - "02_Personal"
+
+# Erste passende Regel gewinnt.
+# rules:
+#   - pattern: "*.pdf"
+#     bucket: "01_Work"
+#   - pattern: "IMG_*"
+#     bucket: "02_Personal"
