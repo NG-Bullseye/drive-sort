@@ -6,7 +6,7 @@ Regelbasiertes, reversibles Google-Drive-Aufraeum-Tool. Dry-Run als Default, Man
 
 - **Dry-Run als Default** — `python drive_sort.py` zeigt nur, was passieren wuerde
 - **Manifest-basiert** — `--apply <manifest>` fuehrt die im Manifest protokollierten Moves aus
-- **Komplett reversibel** — `--undo <manifest>` macht jeden Move rueckgaengig
+- **Komplett reversibel** — `--undo ledger/ledger_<ts>.jsonl` macht jeden Move eines Applys rueckgaengig
 - **Protected Buckets** — konfigurierbare Ordner, die nie angefasst werden
 - **Quarantaene statt Loeschen** — keine Datei wird je geloescht
 
