@@ -13,9 +13,14 @@ buckets:
   - "01_Work"
   - "02_Personal"
 
-# Erste passende Regel gewinnt.
-# rules:
-#   - pattern: "*.pdf"
-#     bucket: "01_Work"
-#   - pattern: "IMG_*"
-#     bucket: "02_Personal"
+# Nie hart löschen: Müll → <quarantine>/<datum>/.
+quarantine: "99_Review"
+
+# Erste passende Regel gewinnt. Felder: name, target, ext | name_re | empty_gdoc | any
+file_rules:
+  - name: pdf
+    ext: [pdf]
+    target: "01_Work"
+  - name: rest
+    any: true
+    target: "00_Inbox"

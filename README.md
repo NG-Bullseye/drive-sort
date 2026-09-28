@@ -5,7 +5,7 @@ Regelbasiertes, reversibles Google-Drive-Aufraeum-Tool. Dry-Run als Default, Man
 ## Design
 
 - **Dry-Run als Default** — `python drive_sort.py` zeigt nur, was passieren wuerde
-- **Manifest-basiert** — `--apply <manifest>` fuehrt die im Manifest protokollierten Moves aus
+- **Manifest-basiert** — `--apply <manifest>` fuehrt die im Manifest (`manifests/manifest_<ts>.tsv`) protokollierten Moves aus
 - **Komplett reversibel** — `--undo ledger/ledger_<ts>.jsonl` macht jeden Move eines Applys rueckgaengig
 - **Protected Buckets** — konfigurierbare Ordner, die nie angefasst werden
 - **Quarantaene statt Loeschen** — keine Datei wird je geloescht
@@ -14,9 +14,9 @@ Regelbasiertes, reversibles Google-Drive-Aufraeum-Tool. Dry-Run als Default, Man
 
 ```bash
 cd drive-sort
-cp sort-rules.yaml.example sort-rules.yaml   # anpassen: remote, buckets, protected
-python3 drive_sort.py                         # dry-run
-python3 drive_sort.py --apply manifests/YYYY-MM-DD-manifest.json   # ausfuehren
+./bootstrap.sh                                # pyyaml + sort-rules.yaml aus Vorlage
+python3 drive_sort.py                         # dry-run, schreibt manifests/manifest_<ts>.tsv
+python3 drive_sort.py --apply manifests/manifest_<ts>.tsv   # ausfuehren
 ```
 
 Voraussetzung: `rclone` muss konfiguriert sein (`rclone config`).
@@ -25,14 +25,12 @@ Voraussetzung: `rclone` muss konfiguriert sein (`rclone config`).
 
 ```yaml
 remote: "gdrive:"           # rclone remote name
-protected:                  # nie anfassen
-  - Backup
-  - secrets
-buckets:                    # Ziel-Buckets (erste passende Regel gewinnt)
-  - "00_Inbox"
-  - "01_Work"
-  - "02_Personal"
-rules: []                   # Regeln: {pattern, bucket}
+protected: [Backup, secrets]  # nie anfassen
+buckets: ["00_Inbox", "01_Work", "02_Personal"]
+quarantine: "99_Review"     # Muell → 99_Review/<datum>/, nie loeschen
+file_rules:                 # erste passende Regel gewinnt; Felder: name, target, ext | name_re | empty_gdoc | any
+  - {name: rest, any: true, target: "00_Inbox"}
+# optional: folder_moves, dedupe_dirs
 ```
 
 ## License
